@@ -1,3 +1,38 @@
+# Todoリスト
+Todoリストの表示、Todoリストの追加、更新、削除を行うことができる
+![1QLUVZtLUfDdU72M1hmTDSMT-OiB9ezDLHIEDf1IS](https://user-images.githubusercontent.com/119716881/215355181-25125eff-866f-4294-b99b-2978a92debed.png)
+
+
+## 作成した目的
+Laravelを使用して初歩的なWebアプリの作成が適正に行うことができるか確認するため
+
+## 機能一覧
+- 例）ログイン機能
+- Todo一覧の取得
+- Todo作成
+- Todo更新
+- Todo削除
+
+## 使用技術（実行環境）
+- 例）　Laravel　8.x（言語やフレームワーク、バージョンなどが記載されていると良い）
+- Laravel Framework 8.83.27
+- php
+- html
+- css
+
+## テーブル設計
+< --- 作成したテーブル設計の画像 ---- >
+![image](https://user-images.githubusercontent.com/119716881/215355275-b6f46c20-9969-40c0-8ad9-500c473ecc3d.png)
+
+## ER図
+< --- 作成したER図の画像 ---- >
+![image](https://user-images.githubusercontent.com/119716881/215355311-f6346275-7dc7-4b7e-83a5-fa17f3dd42ad.png)
+
+## 他に記載することがあれば記述する
+例） ## 環境構築、## アカウントの種類（テストユーザーなど）
+
+
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 <p align="center">
