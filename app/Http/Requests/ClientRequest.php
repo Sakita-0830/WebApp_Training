@@ -12,11 +12,7 @@ class ClientRequest extends FormRequest
      * @return bool
      */
     public function authorize(){
-        if($this->path() == '/'){
             return true;
-        } else {
-            return false;
-        }
     }
 
     /**
@@ -26,7 +22,7 @@ class ClientRequest extends FormRequest
      */
     public function rules(){
         return [
-            'content'=>'required',
+            //
         ];
     }
 }

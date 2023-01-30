@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Todo;
 use Illuminate\Http\Request;
 use App\Http\Requests\TodoRequest;
-
+use App\Http\Requests\ClientRequest;
 
 class TodoController extends Controller{
     public function index(){
@@ -26,7 +26,7 @@ class TodoController extends Controller{
         return redirect('/');
     }
 
-    public function delete(TodoRequest $request){
+    public function delete(ClientRequest $request){
         $form = $request->all();
         unset($form['_token']);
         Todo::where('id', $request->id)->delete();
