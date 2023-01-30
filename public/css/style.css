@@ -8,7 +8,8 @@ body{
   padding: 30px;
   margin: 40vh auto 0 auto;
 }
-.form_text{
+.todo_error-content{
+  width: 80%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -16,6 +17,7 @@ body{
 .todo_textbox{
   width: 80%;
   font-size: 14px;
+  margin-right: 10px;
   padding: 5px;
   border: 1px solid rgb(151, 151, 151);
   border-radius: 5px;
