@@ -8,10 +8,15 @@
   <h1 class="title">
     Todo List
   </h1>
-  <form action="/store" method="POST" class="form_text">
+  <form action="/store" method="POST">
     @csrf
+    @if ($errors->has('content'))
+      <p>{{$errors->first('content')}}</p>
+    @endif
+    <div class="todo_error-content">
       <input type="text" name="content" class="todo_textbox">
       <input type="submit" value="追加" class="todo_submit">
+    </div>
   </form>
   <table class="todo_table">
     <tr class="todo_table-tr">
