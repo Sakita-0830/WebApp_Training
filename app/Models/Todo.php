@@ -11,5 +11,7 @@ class Todo extends Model
 
     protected $fillable = ['content'];
 
-    protected $guarded = ['id'];
+    protected $guarded = ['id', 'user_id', 'tag_id'];
+
+
 }
