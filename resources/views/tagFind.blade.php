@@ -20,13 +20,11 @@
     @endif
     <div class="todo_error-content">
       <input type="text" name="content" class="todo_textbox">
-      <select name="tag" name="tag" class="tag-list">
-        <option value=" "></option>  
-        <option value="家事">家事</option>
-        <option value="勉強">勉強</option>
-        <option value="食事">食事</option>
-        <option value="運動">運動</option>
-        <option value="移動">移動</option>
+      <select name="tag_id" class="tag-list">
+        <option value=null></option>
+        @foreach ($tags as $tag) 
+          <option value="{{$tag->id}}">{{$tag->tag}}</option>
+        @endforeach
       </select>
       <input type="submit" value="検索" class="todo_submit">
     </div>
@@ -39,38 +37,41 @@
       <th class="todo_table-title">更新</th>
       <th class="todo_table-title">削除</th>
     </tr>
-    @foreach ($todo as $todo)
-    <tr class="todo_table-tr">
-      <td class="todo_table-created">{{$tag->created_at}}</td>
-      <form action="/update" method="POST">
-      @csrf
-        <td>
-          <input type="text" name="content"  class="todo_table-task" value={{$tag->content}}>
-        </td>
-        <td>
-          <select name="tag" class="tag-list">
-            <option value=" "></option>  
-            <option value="家事">家事</option>
-            <option value="勉強">勉強</option>
-            <option value="食事">食事</option>
-            <option value="運動">運動</option>
-            <option value="移動">移動</option>
-          </select>
-        </td>
-        <td>  
-          <input class="todo_table_form-item" name="id" value={{$todo->id}}>
-          <input type="submit" value="更新" class="todo_table-update">
-        </td>
-      </form>
-      <form action="/delete" method="POST">
-      @csrf
-        <td>
-          <input type="text" name="id" class="todo_table_form-item" value={{$todo->id}}>
-          <input type="submit" value="削除" class="todo_table-delete">
-        </td>
-      </form>
-    </tr>
-    @endforeach
+    @if (@isset($search))
+      @foreach ($search as $search)
+      <tr class="todo_table-tr">
+        <td class="todo_table-created">{{$search->created_at}}</td>
+        <form action="/update" method="POST">
+        @csrf
+          <td>
+            <input type="text" name="content"  class="todo_table-task" value={{$search->content}}>
+          </td>
+          <td>
+            <select name="tag" class="tag-list">
+              @foreach ($tags as $tag) 
+                @if($search->tag_id === $tag->id)
+                  <option value="{{$tag->id}}" selected="selected">{{$tag->tag}}</option>
+                @else
+                  <option value="{{$tag->id}}">{{$tag->tag}}</option>
+                @endif
+              @endforeach
+            </select>
+          </td>
+          <td>  
+            <input class="todo_table_form-item" name="id" value={{$search->id}}>
+            <input type="submit" value="更新" class="todo_table-update">
+          </td>
+        </form>
+        <form action="/delete" method="POST">
+        @csrf
+          <td>
+            <input type="text" name="id" class="todo_table_form-item" value={{$search->id}}>
+            <input type="submit" value="削除" class="todo_table-delete">
+          </td>
+        </form>
+      </tr>
+      @endforeach
+    @endif
   </table>
   <a href="/home" class="index-return">戻る</a>
 </div>

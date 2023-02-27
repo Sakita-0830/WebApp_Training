@@ -12,52 +12,56 @@ use Illuminate\Support\Facades\Auth;
 class TodoController extends Controller{
     public function index(){
         $user = Auth::user();
-        $todo = Todo::all();
-        $tag = Tag::all();
-        $param = ['todo' => $todo, 'user' =>$user, 'tag' =>$tag];
+        $todos = Todo::all();
+        $tags = Tag::all();
+        $param = ['todos' => $todos, 'user' =>$user, 'tags' =>$tags];
         return view('index', $param);
     }
 
     public function store(TodoRequest $request){
-        dd($request);
-        $todo = Todo::with('tag')->get();
-        $todo = Todo::with('users')->get();
         $todo = $request->all();
         Todo::create($todo);
-        return redirect('/');
+        return redirect('/home');
     }
 
     public function update(TodoRequest $request){
         $form = $request->all();
         unset($form['_token']);
         Todo::where('id', $request->id)->update($form);
-        return redirect('/');
+        return redirect('/home');
     }
 
     public function delete(ClientRequest $request){
         $form = $request->all();
         unset($form['_token']);
         Todo::where('id', $request->id)->delete();
-        return redirect('/');
+        return redirect('/home');
     }
 
     public function indexFind(){
         $user = Auth::user();
-        $todo = Todo::all();
-        $param = ['todo' => $todo, 'user' =>$user];
+        $todos = Todo::all();
+        $tags = Tag::all();
+        $param = ['todos' => $todos, 'user' =>$user, 'tags' =>$tags];
         return view('tagFind', $param);
     }
 
     public function find(Request $request){
         $user = Auth::user();
         $todo = Todo::all();
-        $search = Todo::where('content', 'LIKE BINARY',"%{$request->input}%")->where('tag', 'LIKE BINARY',"%{$request->tag}%")->get();
-        
-        $tag = tag::all();
+        $tags = tag::all();
+        if($request->content === null){
+            $search = Todo::where('tag_id', 'LIKE BINARY',"%{$request->tag_id}%")->get();
+        } elseif($request->tag_id === null){
+            $search = Todo::where('content', 'LIKE BINARY',"%{$request->content}%")->get();
+        } else  {
+            $search = Todo::where('content', 'LIKE BINARY',"%{$request->content}%")->orWhere('tag_id', '=',"%{$request->tag_id}%")->get();
+        }
         $param = [
-        'input' => $request->input,
-        'todo' => $search,
-        'user' => $user
+        'request' => $request,
+        'search' => $search,
+        'user' => $user,
+        'tags' => $tags
         ];
         return view('tagFind', $param);
     }

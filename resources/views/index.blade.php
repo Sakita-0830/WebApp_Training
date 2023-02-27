@@ -26,10 +26,11 @@
       <p>{{$errors->first('content')}}</p>
     @endif
     <div class="todo_error-content">
-      <input type="hidden" name="users_id" value="{{$user->id}}">
+      <input type="hidden" name="user_id" value="{{$user->id}}">
       <input type="text" name="content" class="todo_textbox">
-      <select name="tag" class="tag-list">
-        @foreach ($tag as $tag) 
+      <select name="tag_id" class="tag-list">
+        <option value=null></option>
+        @foreach ($tags as $tag) 
         <option value="{{$tag->id}}">{{$tag->tag}}</option>
         @endforeach
       </select>
@@ -48,7 +49,7 @@
       <th class="todo_table-title">削除</th>
     </tr>
     <!-- タスクデータ -->
-    @foreach ($todo as $todo)
+    @foreach ($todos as $todo)
     <tr class="todo_table-tr">
       <td class="todo_table-created">{{$todo->created_at}}</td>
       <!-- updateフォーム -->
@@ -59,8 +60,12 @@
         </td>
         <td>
           <select name="tag_id" class="tag-list">
-            @foreach ($tag as $tag) 
-            <option value="{{$tag->id}}">{{$tag->tag}}</option>
+            @foreach ($tags as $tag) 
+              @if($todo->tag_id === $tag->id)
+                <option value="{{$tag->id}}" selected="selected">{{$tag->tag}}</option>
+              @else
+                <option value="{{$tag->id}}">{{$tag->tag}}</option>
+              @endif
             @endforeach
           </select>
         </td>

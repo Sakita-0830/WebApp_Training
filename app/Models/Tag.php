@@ -9,7 +9,7 @@ class Tag extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['tag'];
+    // protected $fillable = ['tag'];
 
     protected $guarded = ['id'];
 
