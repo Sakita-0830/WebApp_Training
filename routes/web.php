@@ -18,22 +18,22 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 
 
-Route::get('/home', [TodoController::class, 'index'])->middleware('auth');
+Route::get('/', [TodoController::class, 'index'])->middleware('auth');
 Route::post('/store', [TodoController::class,'store']);
 Route::post('/update', [TodoController::class,'update']);
 Route::post('/delete', [TodoController::class,'delete']);
 Route::get('/indexFind', [TodoController::class, 'indexFind']);
 Route::post('/find', [TodoController::class, 'find']);
 
-Route::get('/', function () {
+Route::get('/index', function () {
     return view('welcome');
 });
 
 
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+    return view('index');
+})->middleware(['auth'])->name('index');
 
 require __DIR__.'/auth.php';
 

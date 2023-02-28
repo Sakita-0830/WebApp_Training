@@ -50,12 +50,12 @@ class TodoController extends Controller{
         $user = Auth::user();
         $todo = Todo::all();
         $tags = tag::all();
-        if($request->content === null){
+        if($request->content == null && $request->tag_id != "null"){
             $search = Todo::where('tag_id', 'LIKE BINARY',"%{$request->tag_id}%")->get();
-        } elseif($request->tag_id === null){
+        } elseif($request->content != null && $request->tag_id == "null"){
             $search = Todo::where('content', 'LIKE BINARY',"%{$request->content}%")->get();
-        } else  {
-            $search = Todo::where('content', 'LIKE BINARY',"%{$request->content}%")->orWhere('tag_id', '=',"%{$request->tag_id}%")->get();
+        } else {
+            $search = Todo::where('content', 'LIKE BINARY',"%{$request->content}%")->where('tag_id', 'LIKE BINARY',"%{$request->tag_id}%")->get();
         }
         $param = [
         'request' => $request,

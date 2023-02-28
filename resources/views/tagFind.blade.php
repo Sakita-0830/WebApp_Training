@@ -39,40 +39,42 @@
     </tr>
     @if (@isset($search))
       @foreach ($search as $search)
-      <tr class="todo_table-tr">
-        <td class="todo_table-created">{{$search->created_at}}</td>
-        <form action="/update" method="POST">
-        @csrf
-          <td>
-            <input type="text" name="content"  class="todo_table-task" value={{$search->content}}>
-          </td>
-          <td>
-            <select name="tag" class="tag-list">
-              @foreach ($tags as $tag) 
-                @if($search->tag_id === $tag->id)
-                  <option value="{{$tag->id}}" selected="selected">{{$tag->tag}}</option>
-                @else
-                  <option value="{{$tag->id}}">{{$tag->tag}}</option>
-                @endif
-              @endforeach
-            </select>
-          </td>
-          <td>  
-            <input class="todo_table_form-item" name="id" value={{$search->id}}>
-            <input type="submit" value="更新" class="todo_table-update">
-          </td>
-        </form>
-        <form action="/delete" method="POST">
-        @csrf
-          <td>
-            <input type="text" name="id" class="todo_table_form-item" value={{$search->id}}>
-            <input type="submit" value="削除" class="todo_table-delete">
-          </td>
-        </form>
-      </tr>
+      @if($search->user_id == $user->id)
+        <tr class="todo_table-tr">
+          <td class="todo_table-created">{{$search->created_at}}</td>
+          <form action="/update" method="POST">
+          @csrf
+            <td>
+              <input type="text" name="content"  class="todo_table-task" value={{$search->content}}>
+            </td>
+            <td>
+              <select name="tag" class="tag-list">
+                @foreach ($tags as $tag) 
+                  @if($search->tag_id === $tag->id)
+                    <option value="{{$tag->id}}" selected="selected">{{$tag->tag}}</option>
+                  @else
+                    <option value="{{$tag->id}}">{{$tag->tag}}</option>
+                  @endif
+                @endforeach
+              </select>
+            </td>
+            <td>  
+              <input class="todo_table_form-item" name="id" value={{$search->id}}>
+              <input type="submit" value="更新" class="todo_table-update">
+            </td>
+          </form>
+          <form action="/delete" method="POST">
+          @csrf
+            <td>
+              <input type="text" name="id" class="todo_table_form-item" value={{$search->id}}>
+              <input type="submit" value="削除" class="todo_table-delete">
+            </td>
+          </form>
+        </tr>
+        @endif
       @endforeach
     @endif
   </table>
-  <a href="/home" class="index-return">戻る</a>
+  <a href="/" class="index-return">戻る</a>
 </div>
 @endsection
