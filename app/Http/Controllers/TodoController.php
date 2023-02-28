@@ -21,21 +21,21 @@ class TodoController extends Controller{
     public function store(TodoRequest $request){
         $todo = $request->all();
         Todo::create($todo);
-        return redirect('/home');
+        return redirect('/');
     }
 
     public function update(TodoRequest $request){
         $form = $request->all();
         unset($form['_token']);
         Todo::where('id', $request->id)->update($form);
-        return redirect('/home');
+        return redirect('/');
     }
 
     public function delete(ClientRequest $request){
         $form = $request->all();
         unset($form['_token']);
         Todo::where('id', $request->id)->delete();
-        return redirect('/home');
+        return redirect('/');
     }
 
     public function indexFind(){
